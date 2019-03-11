@@ -12,17 +12,13 @@ import pickle
 from nltk.corpus import reuters
 from nltk.tokenize import RegexpTokenizer
 import nltk
-import torch
-from torch.autograd import Variable
 import numpy as np
-import torch.functional as F1
-import torch.nn.functional as F
 import random
 
 from nltk import word_tokenize
-from nltk.stem.porter import PorterStemmer
+
 import re
-from nltk.corpus import stopwords
+
 
 
 # In[4]:
@@ -35,7 +31,6 @@ window_size =3
 # In[5]:
 
 
-cachedStopWords = stopwords.words("english")
 
 #print(type(reuters))
 
@@ -89,7 +84,7 @@ for sentence in tokenized_corpus:
 #print(vocabulary)
 
 #print(vocabulary[0:10])
-print(len(vocabulary))
+#print(len(vocabulary))
 
 word2idx = {w: idx for (idx, w) in enumerate(vocabulary)}
 idx2word = {idx: w for (idx, w) in enumerate(vocabulary)}
@@ -127,8 +122,8 @@ for sentence in tokenized_corpus:
             idx_pairs.append((indices[center_word_pos], context_word_idx))
 
 idx_pairs = np.array(idx_pairs) # it will be useful to have this as numpy array
-print (len(idx_pairs),":idx_pairs")
-idx_pairs1=idx_pairs[int(len(idx_pairs)/10):,:]
+#print (len(idx_pairs),":idx_pairs")
+
 
 
 # In[22]:
@@ -146,20 +141,12 @@ pickle_out.close()
 # In[7]:
 
 
-def get_input_layer(word_idx):
-    x = np.zeros(vocabulary_size)
-    x[word_idx] = 1.0
-    return x
-
 
 # In[8]:
 
 
 from numba import jit
-from numba import vectorize
-#@vectorize(['float32(float32, float32, float32,float32,float32)',
-#            'float64(float64, float64, float64,float64,float64)'],
-#           target='roc')
+
 @jit()
 def train(i,li,nli,W1,W2):
     start_time=time.time()
@@ -249,7 +236,7 @@ for epo in range(num_epochs):
 
 
     np.savetxt('data/w_embdim50_wind3_k10.txt',W)
-    print("time in this epoch:",time.time()-ste)
+    #print("time in this epoch:",time.time()-ste)
     
     
         
@@ -365,54 +352,22 @@ for input1,target in test_idx_pairs:
 # In[13]:
 
 
-print(loss)
+print("loss in validation set = ",loss)
 
 
 # In[14]:
 
 
-def cosineSimilarity(v1,v2):
-    return np.dot(v1,v2)/math.sqrt(np.dot(v1,v1)*np.dot(v2,v2))
 
 
 # In[16]:
 
 
-import pandas as pd
-df = pd.read_csv("data/SimLex-999.txt",sep="\t")
-
-df1 = df[['word1', 'word2','SimLex999']]
-
-print (df1.head())
-
 
 # In[17]:
 
 
-import numpy as np
-n,m=df1.shape
-df1=np.array(df1)
-cos_score=np.zeros(n)
-sim_score=np.zeros(n)
 
-c=0
-for w1,w2,simscore in df1:
-    #print(w1,w2)
-    if w1 in vocabulary and w2 in vocabulary:
-        i=word2idx[w1]
-        j=word2idx[w2]
-        cos_score[c]=cosineSimilarity(W[i],W[j])
-        sim_score[c]=simscore
-
-    c+=1
-print(cos_score,sim_score)
-
-
-# In[19]:
-
-
-from scipy import stats
-print(stats.spearmanr(cos_score, sim_score))
 
 
 # In[ ]:
