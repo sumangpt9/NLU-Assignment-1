@@ -66,7 +66,7 @@ for w1,w2,simscore in df1:
         sim_score[c]=simscore
 
     c+=1
-print(cos_score,sim_score)
+#print(cos_score,sim_score)
 
 
 # In[13]:
