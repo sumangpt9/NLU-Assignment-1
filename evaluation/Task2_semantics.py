@@ -48,7 +48,7 @@ for j in range(len(filenames)):
     for w1,w2,w3,w4 in df:
         total_Entries=total_Entries+1
         if w1 in vocabulary and w2 in vocabulary and w3 in vocabulary and w4 in vocabulary:
-            print(w1,w2,w3,w4)
+            #print(w1,w2,w3,w4)
             w1=w1.lower()
             w2=w2.lower()
             w3=w3.lower()
@@ -63,16 +63,16 @@ for j in range(len(filenames)):
                     max_similarity=cosineSimilarity(v,W[i])
             if idx2word[max_similar]==w4:
                 correct=correct+1
-            print(idx2word[max_similar])
+            #print(idx2word[max_similar])
 
 
-print(correct/total)        
+print("Accuracy = ",correct/total)        
 
 
 # In[32]:
 
 
-print(total)
+
 
 
 # In[ ]:
