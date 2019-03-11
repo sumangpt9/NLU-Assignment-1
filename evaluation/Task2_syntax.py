@@ -62,25 +62,25 @@ for j in range(len(filenames)):
                     max_similar=i
                     max_similarity=cosineSimilarity(v,W[i])
             if idx2word[max_similar]==w4:
-                print(w1,w2,w3,w4)
+                #print(w1,w2,w3,w4)
                 correct=correct+1
-                print(idx2word[max_similar])
+                #print(idx2word[max_similar])
 
 
-print(correct/total)        
+print("Accuracy = ",correct/total)        
         
 
 
 # In[6]:
 
 
-print(correct)
+
 
 
 # In[7]:
 
 
-print(total)
+
 
 
 # In[ ]:
