@@ -73,8 +73,7 @@ print(cos_score,sim_score)
 
 
 from scipy import stats
-print(stats.spearmanr(cos_score, sim_score))
-print(stats.pearsonr(cos_score, sim_score))
+print("Correlation with simlex: "+stats.spearmanr(cos_score, sim_score))
 
 
 # In[ ]:
