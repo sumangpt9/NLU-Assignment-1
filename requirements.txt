@@ -1,0 +1,7 @@
+numba==0.42.1
+scipy==1.2.1
+torch==1.0.1.post2
+nltk==3.4
+tqdm==4.19.9
+pandas==0.23.4
+numpy==1.16.2
