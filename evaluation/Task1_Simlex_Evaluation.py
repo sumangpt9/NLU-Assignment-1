@@ -65,9 +65,10 @@ for w1,w2,simscore in df1:
         cos_score[c]=cosineSimilarity(W[i],W[j])
         sim_score[c]=simscore
 
-    c+=1
+        c+=1
 #print(cos_score,sim_score)
-
+cos_score=cos_score[:c]
+sim_score=sim_score[:c]
 
 # In[13]:
 
